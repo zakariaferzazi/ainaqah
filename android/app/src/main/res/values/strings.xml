@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MightyStore Flutter</string>
+    <string name="facebook_app_id">393286241783557</string>
+    <string name="fb_login_protocol_scheme">fb393286241783557</string>
+</resources>

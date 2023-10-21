@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "982867737657",
+    "project_id": "ainaqah-73bff",
+    "storage_bucket": "ainaqah-73bff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982867737657:android:f60dc359df0169c42ea1e8",
+        "android_client_info": {
+          "package_name": "com.ainaqah.shop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX9Pr9Y-yAH5BNQfYhSL939Xq6htLfUmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
