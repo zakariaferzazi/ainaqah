@@ -1,3 +1,1 @@
-# MightyStore
-
-MightyStore
+# Ainaqah
