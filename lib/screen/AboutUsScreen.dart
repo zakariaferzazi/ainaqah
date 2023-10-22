@@ -61,6 +61,8 @@ class AboutUsScreenState extends State<AboutUsScreen> {
                             Text('${snap.data!.appName.validate()}', style: boldTextStyle(color: primaryColor, size: 20)),
                             8.height,
                             Text('V ${snap.data!.version.validate()}', style: boldTextStyle(color: primaryColor, size: 20)),
+                            10.height,
+                            Text("""Help Center\n Disputes & Reports, Buyer Protection, Report IPR infringement, Regulated Information, Integrity Compliance, please contact us on one of the following accounts with reference of order.""",textAlign: TextAlign.center, style: boldTextStyle()).visible(getStringAsync(WHATSAPP).isNotEmpty)
                           ],
                         );
                       }
@@ -83,8 +85,7 @@ class AboutUsScreenState extends State<AboutUsScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(appLocalization.translate('llb_follow_us')!, style: boldTextStyle()).visible(getStringAsync(WHATSAPP).isNotEmpty),
-                  16.height,
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,

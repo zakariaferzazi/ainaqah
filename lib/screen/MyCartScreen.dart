@@ -43,7 +43,7 @@ class MyCartScreenState extends State<MyCartScreen> {
   Shipping? shipping;
   ShippingMethodResponse? shippingMethodResponse;
 
-  bool isCoupons = false;
+  bool isCoupons = true;
 
   var selectedShipment = 0;
   var mDiscountInfo;

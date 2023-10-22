@@ -38,9 +38,9 @@ const payStackPublicKey = 'pk_test_c46ddf9def17e34152daa1b6e2eb940dedea41f0';
 
 ///Terms&Condition
 const TERMS_CONDITION_URL =
-    "https://meetmighty.com/codecanyon/document/mightyStore/#mm-support";
+    "https://zakaria.top/privacy-policy.html";
 const PRIVACY_POLICY_URL =
-    "https://meetmighty.com/codecanyon/document/mightyStore/#mm-support";
+    "https://zakaria.top/privacy-policy.html";
 
 /// SharedPreferences Keys
 const IS_LOGGED_IN = 'IS_LOGGED_IN';

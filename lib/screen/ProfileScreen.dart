@@ -154,14 +154,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                 AboutUsScreen().launch(context);
               }),
               Divider(height: 0).paddingOnly(left: 16, right: 16),
-              mSideMenu(appLocalization.translate('choose_dashboard_page_variant'), MaterialCommunityIcons.view_dashboard_outline, () {
-                ChooseDashboardPageVariant().launch(context);
-              }).visible(enableDashboardVariant == true),
-              Divider(height: 0).paddingOnly(left: 16, right: 16).visible(enableDashboardVariant == true),
-              mSideMenu(appLocalization.translate('choose_product_detail_page_variant'), Icons.mobile_friendly, () {
-                ChooseProductDetailVariant().launch(context);
-              }).visible(enableDashboardVariant == true),
-              Divider(height: 0).paddingOnly(left: 16, right: 16).visible(enableDashboardVariant == true),
+ 
               mSideMenu(appLocalization.translate('lbl_terms_conditions'), Icons.assignment_outlined, () {
                 redirectUrl(getStringAsync(TERMS_AND_CONDITIONS).isEmptyOrNull ? TERMS_CONDITION_URL : getStringAsync(TERMS_AND_CONDITIONS));
               }),
@@ -237,9 +230,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                 SignInScreen().launch(context);
               }).visible(!mIsLoggedIn),
               Divider(height: 0).paddingOnly(left: 16, right: 16).visible(!mIsLoggedIn && enableMultiDemo == true),
-              mSideMenu(appLocalization.translate('lbl_multiple_demo'), Icons.check_circle_outline_outlined, () {
-                ChooseDemo().launch(context);
-              }).visible(enableMultiDemo == true),
+    
               16.height,
             ],
           )

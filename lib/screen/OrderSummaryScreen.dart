@@ -161,6 +161,7 @@ class OrderSummaryScreenState extends State<OrderSummaryScreen> {
         .add(PaymentClass(paymentIndex: 8, paymentMethod: 'إيداع إلى محفظة جوالي', image: jawali, account: "1234567890"));
     paymentList!
         .add(PaymentClass(paymentIndex: 9, paymentMethod: 'حوالة عادية عبر أي صراف', image: atm, account: "1234567890"));
+
     setState(() {});
   }
 
@@ -376,7 +377,7 @@ class OrderSummaryScreenState extends State<OrderSummaryScreen> {
       createNativeOrder(a, b,
           isPayment: true, isWallet: true);
     } else {
-      createNativeOrder(b, b, isPayment: true);
+      createNativeOrder(a, b, isPayment: true);
     }
   }
 
@@ -517,17 +518,27 @@ class OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                     Text("الحساب : ${paymentList![index].account!}"),
                                     Text("بإسم : عساف غالب"),
                                     Text("+رقم الهاتف : 17146844346")
-                                  
-                                                           
-                                  
                                   ],).visible(currentTimeValue == index),
-                                )
+                                ),
+                                
                               ],
                             ),
                           );
                         },
                         itemCount: paymentList!.length,
                       ),
+                      Center(
+                        child: Column(
+                          children: [
+                        Text("لأخذ المنتج من المتجر - Pick up", style: secondaryTextStyle(
+                                            size: 17,)),
+                        Text("Tahreer Square Sana'a", style: secondaryTextStyle(
+                                            size: 17,)),
+                        Text("+رقم الهاتف : 17146844346", style: secondaryTextStyle(
+                                            size: 17,),)
+                      
+                        ],),
+                      )
                     ],
                   ).paddingOnly(top: 8).visible(isNativePayment == true),
                   Divider(
