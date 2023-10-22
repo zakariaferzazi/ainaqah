@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '/../component/HomeDataComponent.dart';
 import '/../component/HomeScreenComponent2/DashBoard2Product.dart';
 import '/../component/HomeScreenComponent2/DashboardComponent2.dart';
@@ -108,9 +108,11 @@ class HomeScreenState extends State<HomeScreen2> {
               viewAll(() {
                 if (title == builderResponse.dashboard!.dealOfTheDay!.title) {
                   ViewAllScreen(title, isSpecialProduct: true, specialProduct: "deal_of_the_day").launch(context);
-                } else if (title == builderResponse.dashboard!.offerProduct!.title) {
-                  ViewAllScreen(MaxAdContentRating.t, isSpecialProduct: true, specialProduct: "offer").launch(context);
-                } else {
+                } 
+                // else if (title == builderResponse.dashboard!.offerProduct!.title) {
+                //   ViewAllScreen(MaxAdContentRating.t, isSpecialProduct: true, specialProduct: "offer").launch(context);
+                // } 
+                else {
                   ViewAllScreen(title);
                 }
               }, subtitle),

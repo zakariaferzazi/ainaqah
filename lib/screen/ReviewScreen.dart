@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '/../main.dart';
 import '/../models/ProductReviewModel.dart';
 import '/../network/rest_apis.dart';
@@ -470,19 +470,19 @@ class ReviewScreenState extends State<ReviewScreen> {
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: mTop(context, appLocalization.translate('lbl_reviews'), showBack: true) as PreferredSizeWidget?,
-        bottomNavigationBar: isMobile
-            ? Container(
-                height: 60,
-                child: AdWidget(
-                  ad: BannerAd(
-                    adUnitId:  getBannerAdUnitId()! ,
-                    size: AdSize.banner,
-                    request: AdRequest(),
-                    listener: BannerAdListener(),
-                  )..load(),
-                ),
-              ).visible(enableAds == true)
-            : SizedBox(),
+        // bottomNavigationBar: isMobile
+        //     ? Container(
+        //         height: 60,
+        //         child: AdWidget(
+        //           ad: BannerAd(
+        //             adUnitId:  getBannerAdUnitId()! ,
+        //             size: AdSize.banner,
+        //             request: AdRequest(),
+        //             listener: BannerAdListener(),
+        //           )..load(),
+        //         ),
+        //       ).visible(enableAds == true)
+        //     : SizedBox(),
         body: BodyCornerWidget(
           child: Stack(
             children: <Widget>[

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '/../main.dart';
 import '/../utils/AdmobUtils.dart';
 import '/../utils/AppWidget.dart';
@@ -145,17 +145,17 @@ class AboutUsScreenState extends State<AboutUsScreen> {
             2.height,
             Text(getStringAsync(COPYRIGHT_TEXT), style: secondaryTextStyle()).visible(getStringAsync(COPYRIGHT_TEXT).isNotEmpty),
             16.height,
-            Container(
-              height: 60,
-              child: AdWidget(
-                ad: BannerAd(
-                  adUnitId:  getBannerAdUnitId()! ,
-                  size: AdSize.banner,
-                  request: AdRequest(),
-                  listener: BannerAdListener(),
-                )..load(),
-              ),
-            ).visible(enableAds == true)
+            // Container(
+            //   height: 60,
+            //   child: AdWidget(
+            //     ad: BannerAd(
+            //       adUnitId:  getBannerAdUnitId()! ,
+            //       size: AdSize.banner,
+            //       request: AdRequest(),
+            //       listener: BannerAdListener(),
+            //     )..load(),
+            //   ),
+            // ).visible(enableAds == true)
           ],
         ),
       ),

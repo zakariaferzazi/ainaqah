@@ -23,8 +23,6 @@ import '/../utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 BuilderResponse builderResponse = BuilderResponse();
@@ -61,9 +59,9 @@ void main() async {
 
   await initialize();
 
-  Stripe.publishableKey = stripPaymentPublishKey;
-  Stripe.merchantIdentifier = merchantId;
-  await Stripe.instance.applySettings();
+  // Stripe.publishableKey = stripPaymentPublishKey;
+  // Stripe.merchantIdentifier = merchantId;
+  // await Stripe.instance.applySettings();
 
   if (isMobile) {
     //await setupRemoteConfig();
@@ -74,7 +72,7 @@ void main() async {
     final status = await OneSignal.shared.getDeviceState();
     await setValue(PLAYER_ID, status?.userId.toString());
 
-    MobileAds.instance.initialize();
+    // MobileAds.instance.initialize();
     //FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   }
 

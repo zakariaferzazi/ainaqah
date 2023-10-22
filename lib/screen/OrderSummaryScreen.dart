@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_paystack/flutter_paystack.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:flutterwave_standard/core/flutterwave.dart';
-import 'package:flutterwave_standard/models/requests/customer.dart';
-import 'package:flutterwave_standard/models/requests/customizations.dart';
-import 'package:flutterwave_standard/models/responses/charge_response.dart';
-import 'package:flutterwave_standard/view/view_utils.dart';
+// import 'package:flutter_paystack/flutter_paystack.dart';
+// import 'package:flutter_stripe/flutter_stripe.dart';
+// import 'package:flutterwave_standard/core/flutterwave.dart';
+// import 'package:flutterwave_standard/models/requests/customer.dart';
+// import 'package:flutterwave_standard/models/requests/customizations.dart';
+// import 'package:flutterwave_standard/models/responses/charge_response.dart';
+// import 'package:flutterwave_standard/view/view_utils.dart';
 import 'package:intl/intl.dart';
 import '../utils/AppImages.dart';
 import '/../main.dart';
@@ -27,7 +27,7 @@ import '/../utils/Common.dart';
 import '/../utils/Constants.dart';
 import '/../utils/SharedPref.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
+// import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../AppLocalizations.dart';
 import 'DashBoardScreen.dart';
 import 'PlaceOrderScreen.dart';
@@ -64,12 +64,12 @@ class OrderSummaryScreen extends StatefulWidget {
 
 class OrderSummaryScreenState extends State<OrderSummaryScreen> {
   final formKey = GlobalKey<FormState>();
-  final plugin = PaystackPlugin();
-  CheckoutMethod method = CheckoutMethod.card;
+  // final plugin = PaystackPlugin();
+  // CheckoutMethod method = CheckoutMethod.card;
 
   var mOrderModel = OrderResponse();
 
-  late Razorpay _razorPay;
+  // late Razorpay _razorPay;
   List<PaymentClass>? paymentList = [];
 
   Shipping? shipping;
@@ -103,15 +103,15 @@ class OrderSummaryScreenState extends State<OrderSummaryScreen> {
   void initState() {
     super.initState();
     addList();
-    _razorPay = Razorpay();
-    _razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    _razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    // _razorPay = Razorpay();
+    // _razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    //_razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    // _razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     init();
   }
 
   init() async {
-    plugin.initialize(publicKey: payStackPublicKey);
+    // plugin.initialize(publicKey: payStackPublicKey);
     setState(() {});
     fetchTotalBalance();
     if (getStringAsync(PAYMENTMETHOD) == PAYMENT_METHOD_NATIVE) {
@@ -374,10 +374,10 @@ class OrderSummaryScreenState extends State<OrderSummaryScreen> {
 
   void onOrderNowClick(a, b) async {
     if (isSelected == true) {
-      createNativeOrder(a, b,
+      createNativeOrder(b, b,
           isPayment: true, isWallet: true);
     } else {
-      createNativeOrder(a, b, isPayment: true);
+      createNativeOrder(b, b, isPayment: true);
     }
   }
 
@@ -757,55 +757,55 @@ class OrderSummaryScreenState extends State<OrderSummaryScreen> {
     _wallet();
   }
 
-  void stripePayment(BuildContext context) async {
-    paymentCount();
+  // void stripePayment(BuildContext context) async {
+  //   paymentCount();
 
-    var request = {
-      'apiKey': stripPaymentKey,
-      'amount': mAmount * 100,
-      'currency': "INR",
-      'description': "556",
-    };
-    getStripeClientSecret(request).then(
-      (res) async {
-        SetupPaymentSheetParameters setupPaymentSheetParameters =
-            SetupPaymentSheetParameters(
-          paymentIntentClientSecret: res['client_secret'],
-          style: ThemeMode.light,
-          appearance: PaymentSheetAppearance(
-              colors: PaymentSheetAppearanceColors(primary: primaryColor)),
-          applePay: PaymentSheetApplePay(
-              merchantCountryCode:
-                  getStringAsync(DEFAULT_CURRENCY).toUpperCase()),
-          googlePay: PaymentSheetGooglePay(
-              merchantCountryCode:
-                  getStringAsync(DEFAULT_CURRENCY).toUpperCase(),
-              testEnv: true),
-          merchantDisplayName: APP_NAME,
-          customerId: isIOS ? null : '1',
-          //customerEphemeralKeySecret: res.clientSecret.validate(),
-          //setupIntentClientSecret: res.clientSecret.validate(),
-        );
-        await Stripe.instance
-            .initPaymentSheet(
-                paymentSheetParameters: setupPaymentSheetParameters)
-            .then((value) async {
-          await Stripe.instance.presentPaymentSheet().then((value) async {
-            if (isSelected == true)
-              createNativeOrder('strippay', 'Stripe Payment',
-                  isPayment: true, isWallet: true);
-            else
-              createNativeOrder('strippay', 'Stripe Payment', isPayment: true);
-          });
-        }).catchError((e) {
-          toast("Payment Failed");
-          log("presentPaymentSheet ${e.toString()}");
-        });
-      },
-    ).catchError((e) {
-      log("SetupPaymentSheetParameters ${e.toString()}");
-    });
-  }
+  //   var request = {
+  //     'apiKey': stripPaymentKey,
+  //     'amount': mAmount * 100,
+  //     'currency': "INR",
+  //     'description': "556",
+  //   };
+  //   getStripeClientSecret(request).then(
+  //     (res) async {
+  //       SetupPaymentSheetParameters setupPaymentSheetParameters =
+  //           SetupPaymentSheetParameters(
+  //         paymentIntentClientSecret: res['client_secret'],
+  //         style: ThemeMode.light,
+  //         appearance: PaymentSheetAppearance(
+  //             colors: PaymentSheetAppearanceColors(primary: primaryColor)),
+  //         applePay: PaymentSheetApplePay(
+  //             merchantCountryCode:
+  //                 getStringAsync(DEFAULT_CURRENCY).toUpperCase()),
+  //         googlePay: PaymentSheetGooglePay(
+  //             merchantCountryCode:
+  //                 getStringAsync(DEFAULT_CURRENCY).toUpperCase(),
+  //             testEnv: true),
+  //         merchantDisplayName: APP_NAME,
+  //         customerId: isIOS ? null : '1',
+  //         //customerEphemeralKeySecret: res.clientSecret.validate(),
+  //         //setupIntentClientSecret: res.clientSecret.validate(),
+  //       );
+  //       await Stripe.instance
+  //           .initPaymentSheet(
+  //               paymentSheetParameters: setupPaymentSheetParameters)
+  //           .then((value) async {
+  //         await Stripe.instance.presentPaymentSheet().then((value) async {
+  //           if (isSelected == true)
+  //             createNativeOrder('strippay', 'Stripe Payment',
+  //                 isPayment: true, isWallet: true);
+  //           else
+  //             createNativeOrder('strippay', 'Stripe Payment', isPayment: true);
+  //         });
+  //       }).catchError((e) {
+  //         toast("Payment Failed");
+  //         log("presentPaymentSheet ${e.toString()}");
+  //       });
+  //     },
+  //   ).catchError((e) {
+  //     log("SetupPaymentSheetParameters ${e.toString()}");
+  //   });
+  // }
 
   void cod(a,b) {
     paymentCount();
@@ -847,90 +847,90 @@ class OrderSummaryScreenState extends State<OrderSummaryScreen> {
     };
 
     try {
-      _razorPay.open(options);
+      // _razorPay.open(options);
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
-    log("Success:+$response");
-    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!);
-    if (!await isGuestUser()) {
-      if (isSelected == true) {
-        createNativeOrder('razorpay', "RazorPay",
-            isPayment: true, isWallet: true);
-        clearCartItems().then((response) {
-          if (!mounted) return;
-          appStore.setCount(0);
-          DashBoardScreen().launch(context, isNewTask: true);
-          setState(() {});
-        }).catchError((error) {
-          appStore.setLoading(false);
-          toast(error.toString());
-        });
-      } else {
-        createNativeOrder('razorpay', "RazorPay", isPayment: true);
-        clearCartItems().then((response) {
-          if (!mounted) return;
-          appStore.setCount(0);
-          DashBoardScreen().launch(context, isNewTask: true);
-          setState(() {});
-        }).catchError((error) {
-          appStore.setLoading(false);
-          toast(error.toString());
-        });
-      }
-    } else {
-      appStore.setCount(0);
-      removeKey(CART_DATA);
-      DashBoardScreen().launch(context, isNewTask: true);
-    }
-  }
+  // void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+  //   log("Success:+$response");
+  //   Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!);
+  //   if (!await isGuestUser()) {
+  //     if (isSelected == true) {
+  //       createNativeOrder('razorpay', "RazorPay",
+  //           isPayment: true, isWallet: true);
+  //       clearCartItems().then((response) {
+  //         if (!mounted) return;
+  //         appStore.setCount(0);
+  //         DashBoardScreen().launch(context, isNewTask: true);
+  //         setState(() {});
+  //       }).catchError((error) {
+  //         appStore.setLoading(false);
+  //         toast(error.toString());
+  //       });
+  //     } else {
+  //       createNativeOrder('razorpay', "RazorPay", isPayment: true);
+  //       clearCartItems().then((response) {
+  //         if (!mounted) return;
+  //         appStore.setCount(0);
+  //         DashBoardScreen().launch(context, isNewTask: true);
+  //         setState(() {});
+  //       }).catchError((error) {
+  //         appStore.setLoading(false);
+  //         toast(error.toString());
+  //       });
+  //     }
+  //   } else {
+  //     appStore.setCount(0);
+  //     removeKey(CART_DATA);
+  //     DashBoardScreen().launch(context, isNewTask: true);
+  //   }
+  // }
 
-  void _handlePaymentError(PaymentFailureResponse response) {
-    Fluttertoast.showToast(
-        msg: "ERROR: " + response.code.toString() + " - " + response.message!);
-  }
+  // void _handlePaymentError(PaymentFailureResponse response) {
+  //   Fluttertoast.showToast(
+  //       msg: "ERROR: " + response.code.toString() + " - " + response.message!);
+  // }
 
-  void _handleExternalWallet(ExternalWalletResponse response) {
-    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!);
-  }
+  // void _handleExternalWallet(ExternalWalletResponse response) {
+  //   Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!);
+  // }
 
   //PayStack Payment
-  void payStackCheckOut(BuildContext context) async {
-    paymentCount();
-    formKey.currentState?.save();
-    Charge charge = Charge()
-      ..amount = (mAmount.toInt() * 100) // In base currency
-      ..email = billing!.email
-      ..currency = mCurrency
-      ..card = PaymentCard(
-          number: cardNumber,
-          cvc: cvv,
-          expiryMonth: expiryMonth,
-          expiryYear: expiryYear);
+  // void payStackCheckOut(BuildContext context) async {
+  //   paymentCount();
+  //   formKey.currentState?.save();
+  //   Charge charge = Charge()
+  //     ..amount = (mAmount.toInt() * 100) // In base currency
+  //     ..email = billing!.email
+  //     ..currency = mCurrency
+  //     ..card = PaymentCard(
+  //         number: cardNumber,
+  //         cvc: cvv,
+  //         expiryMonth: expiryMonth,
+  //         expiryYear: expiryYear);
 
-    charge.reference = _getReference();
+  //   charge.reference = _getReference();
 
-    try {
-      CheckoutResponse response = await plugin.checkout(context,
-          method: method, charge: charge, fullscreen: false, logo: MyLogo());
-      payStackUpdateStatus(response.reference, response.message);
-      if (response.message == SUCCESS) {
-        if (isSelected == true)
-          createNativeOrder('paystack', 'Paystack',
-              isPayment: true, isWallet: true);
-        else
-          createNativeOrder('paystack', 'Paystack', isPayment: true);
-      } else {
-        toast("Payment Failed");
-      }
-    } catch (e) {
-      payStackShowMessage("Check console for error");
-      rethrow;
-    }
-  }
+  //   try {
+  //     CheckoutResponse response = await plugin.checkout(context,
+  //         method: method, charge: charge, fullscreen: false, logo: MyLogo());
+  //     payStackUpdateStatus(response.reference, response.message);
+  //     if (response.message == SUCCESS) {
+  //       if (isSelected == true)
+  //         createNativeOrder('paystack', 'Paystack',
+  //             isPayment: true, isWallet: true);
+  //       else
+  //         createNativeOrder('paystack', 'Paystack', isPayment: true);
+  //     } else {
+  //       toast("Payment Failed");
+  //     }
+  //   } catch (e) {
+  //     payStackShowMessage("Check console for error");
+  //     rethrow;
+  //   }
+  // }
 
   String _getReference() {
     String platform;
@@ -953,37 +953,38 @@ class OrderSummaryScreenState extends State<OrderSummaryScreen> {
     log(message);
   }
 
-  void flutterWaveCheckout() async {
-    final customer = Customer(
-      name: billing!.firstName.toString() + " " + billing!.lastName.toString(),
-      phoneNumber: billing!.phone.toString(),
-      email: billing!.email.toString(),
-    );
+  // void flutterWaveCheckout() async {
+  //   final customer = Customer(
+  //     name: billing!.firstName.toString() + " " + billing!.lastName.toString(),
+  //     phoneNumber: billing!.phone.toString(),
+  //     email: billing!.email.toString(),
+  //   );
 
-    final Flutterwave flutterwave = Flutterwave(
-      context: context,
-      publicKey: flutterWavePublicKey.validate(),
-      currency: mCurrency,
-      redirectUrl: "https://www.google.com",
-      txRef: DateTime.now().millisecond.toString(),
-      amount: mAmount.toString(),
-      customer: customer,
-      paymentOptions: "card, payattitude",
-      customization: Customization(title: "Test Payment"),
-      isTestMode: true,
-    );
-    final ChargeResponse response = await flutterwave.charge();
-    if (response.status == 'successful') {
-      if (isSelected == true)
-        createNativeOrder('flutterwave', 'FlutterWave',
-            isPayment: true, isWallet: true);
-      else
-        createNativeOrder('flutterwave', 'FlutterWave', isPayment: true);
+  //   final Flutterwave flutterwave = Flutterwave(
+  //     context: context,
+  //     publicKey: flutterWavePublicKey.validate(),
+  //     currency: mCurrency,
+  //     redirectUrl: "https://www.google.com",
+  //     txRef: DateTime.now().millisecond.toString(),
+  //     amount: mAmount.toString(),
+  //     customer: customer,
+  //     paymentOptions: "card, payattitude",
+  //     customization: Customization(title: "Test Payment"),
+  //     isTestMode: true,
+  //   );
+  //   final ChargeResponse response = await flutterwave.charge();
+  //   if (response.status == 'successful') {
+  //     if (isSelected == true)
+  //       createNativeOrder('flutterwave', 'FlutterWave',
+  //           isPayment: true, isWallet: true);
+  //     else
+  //       createNativeOrder('flutterwave', 'FlutterWave', isPayment: true);
 
-      toast("Payment Successfully");
-      print("${response.toJson()}");
-    } else {
-      FlutterwaveViewUtils.showToast(context, 'Transaction Failed');
-    }
-  }
+  //     toast("Payment Successfully");
+  //     print("${response.toJson()}");
+  //   } else {
+  //     FlutterwaveViewUtils.showToast(context, 'Transaction Failed');
+  //   }
+  // }
+
 }

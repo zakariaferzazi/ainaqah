@@ -14,7 +14,7 @@ import '/../service/LoginService.dart';
 import '/../utils/AppWidget.dart';
 import '/../utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:the_apple_sign_in/the_apple_sign_in.dart';
+// import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 import '../AppLocalizations.dart';
 
@@ -42,11 +42,11 @@ class SignInScreenState extends State<SignInScreen> {
   }
 
   init() async {
-    if (Platform.isIOS) {
-      TheAppleSignIn.onCredentialRevoked!.listen((_) {
-        print("Credentials revoked");
-      });
-    }
+    // if (Platform.isIOS) {
+    //   TheAppleSignIn.onCredentialRevoked!.listen((_) {
+    //     print("Credentials revoked");
+    //   });
+    // }
     if (!getBoolAsync(IS_SOCIAL_LOGIN) && getBoolAsync(IS_REMEMBERED)) {
       usernameCont.text = getStringAsync(USER_EMAIL);
       passwordCont.text = getStringAsync(PASSWORD);
@@ -175,31 +175,31 @@ class SignInScreenState extends State<SignInScreen> {
       socialLogin(req);
     }
 
-    void appleLogIn() async {
-      if (await TheAppleSignIn.isAvailable()) {
-        final AuthorizationResult result = await TheAppleSignIn.performRequests([
-          AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
-        ]);
-        switch (result.status) {
-          case AuthorizationStatus.authorized:
-            log("Result: $result"); //All the required credentials
-            if (result.credential!.email == null) {
-              saveAppleDataWithoutEmail();
-            } else {
-              saveAppleData(result);
-            }
-            break;
-          case AuthorizationStatus.error:
-            log("Sign in failed: ${result.error!.localizedDescription}");
-            break;
-          case AuthorizationStatus.cancelled:
-            log('User cancelled');
-            break;
-        }
-      } else {
-        toast('Apple SignIn is not available for your device');
-      }
-    }
+    // void appleLogIn() async {
+    //   if (await TheAppleSignIn.isAvailable()) {
+    //     final AuthorizationResult result = await TheAppleSignIn.performRequests([
+    //       AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
+    //     ]);
+    //     switch (result.status) {
+    //       case AuthorizationStatus.authorized:
+    //         log("Result: $result"); //All the required credentials
+    //         if (result.credential!.email == null) {
+    //           saveAppleDataWithoutEmail();
+    //         } else {
+    //           saveAppleData(result);
+    //         }
+    //         break;
+    //       case AuthorizationStatus.error:
+    //         log("Sign in failed: ${result.error!.localizedDescription}");
+    //         break;
+    //       case AuthorizationStatus.cancelled:
+    //         log('User cancelled');
+    //         break;
+    //     }
+    //   } else {
+    //     toast('Apple SignIn is not available for your device');
+    //   }
+    // }
 
     Widget socialButtons = Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -215,12 +215,12 @@ class SignInScreenState extends State<SignInScreen> {
           icon: Icon(MaterialIcons.phone_android, size: 36),
         ).visible(enableSignWithOtp == true),
         8.width,
-        IconButton(
-          onPressed: () {
-            appleLogIn();
-          },
-          icon: Icon(Ionicons.ios_logo_apple, size: 36),
-        ).visible(Platform.isIOS && enableSignWithApple == true),
+        // IconButton(
+        //   onPressed: () {
+        //     // appleLogIn();
+        //   },
+        //   icon: Icon(Ionicons.ios_logo_apple, size: 36),
+        // ).visible(Platform.isIOS && enableSignWithApple == true),
       ],
     );
 

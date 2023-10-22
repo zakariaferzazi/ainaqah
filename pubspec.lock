@@ -297,14 +297,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0+1"
-  eventify:
-    dependency: transitive
-    description:
-      name: eventify
-      sha256: b829429f08586cc2001c628e7499e3e3c2493a1d895fd73b00ecb23351aa5a66
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -361,30 +353,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3+1"
-  firebase_analytics:
-    dependency: "direct main"
-    description:
-      name: firebase_analytics
-      sha256: "6a8b509b81760dca2abe70c46811f3824c150e9a3f85982f062624a7bae31857"
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.5.1"
-  firebase_analytics_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_analytics_platform_interface
-      sha256: acb9cb733fff14041c030ec9c71fc9be6c9d60dbe8932b2a38bc1428d638a915
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.7.1"
-  firebase_analytics_web:
-    dependency: transitive
-    description:
-      name: firebase_analytics_web
-      sha256: "56ee5baf213cae47eab0ec926261dfecb9d7089ee28edf38dca3ad0ca01601c7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.5+1"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -433,22 +401,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.8.0"
-  firebase_crashlytics:
-    dependency: "direct main"
-    description:
-      name: firebase_crashlytics
-      sha256: "833cf891d10e5e819a2034048ff7e8882bcc0b51055c0e17f5fe3f3c3c177a9d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.7"
-  firebase_crashlytics_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_crashlytics_platform_interface
-      sha256: dfdf1172f35fc0b0132bc5ec815aed52c07643ee56732e6807ca7dc12f7fce86
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.6.7"
   firebase_remote_config:
     dependency: "direct main"
     description:
@@ -510,14 +462,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
-  flutter_inappwebview:
-    dependency: transitive
-    description:
-      name: flutter_inappwebview
-      sha256: d198297060d116b94048301ee6749cd2e7d03c1f2689783f52d210a6b7aba350
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.8.0"
   flutter_layout_grid:
     dependency: transitive
     description:
@@ -547,14 +491,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  flutter_paystack:
-    dependency: "direct main"
-    description:
-      name: flutter_paystack
-      sha256: b2038c8f0cfa5a3bdb7b0e2016ceaedbc57e4445180ce6aea56cb0d83a016973
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.7"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -579,14 +515,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.2"
-  flutter_stripe:
-    dependency: "direct main"
-    description:
-      name: flutter_stripe
-      sha256: c8e92b199490553d699be86e7a8e21b7e29dae136a38023dccb1ceec9b36c17d
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.0"
   flutter_svg:
     dependency: transitive
     description:
@@ -621,22 +549,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "8.2.2"
-  flutterwave_standard:
-    dependency: "direct main"
-    description:
-      name: flutterwave_standard
-      sha256: a64d0c47b6fa044573f984c8d00b581aacfa2871669e8acd053c8819ffd552e2
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.4"
-  freezed_annotation:
-    dependency: transitive
-    description:
-      name: freezed_annotation
-      sha256: c3fd9336eb55a38cc1bbd79ab17573113a8deccd0ecbbf926cca3c62803b5c2d
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -661,14 +573,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  google_mobile_ads:
-    dependency: "direct main"
-    description:
-      name: google_mobile_ads
-      sha256: "010b7a7a81b5c8f760eb2e5add8eaa7e429b4982dc8c8e465b709611f52887be"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.0"
   google_sign_in:
     dependency: "direct main"
     description:
@@ -1173,14 +1077,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
-  razorpay_flutter:
-    dependency: "direct main"
-    description:
-      name: razorpay_flutter
-      sha256: "959dbedc3af25fd41b43944bc5db00d4be1ea1967fed5d69fba3fc6700b1f103"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.4"
   rxdart:
     dependency: transitive
     description:
@@ -1346,30 +1242,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  stripe_android:
-    dependency: transitive
-    description:
-      name: stripe_android
-      sha256: "351f3878ef59aee17233604bb36fd894481fb2fa743f8cd08261250d3eec0902"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.0"
-  stripe_ios:
-    dependency: transitive
-    description:
-      name: stripe_ios
-      sha256: "47dd9809c1168499b525b2fea93fa97f4b06abf9357a2a6a06c79310557f9ea8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.0"
-  stripe_platform_interface:
-    dependency: transitive
-    description:
-      name: stripe_platform_interface
-      sha256: d61c73ab6f989e69a7b4009b039080324ff12f39e9558fb0f4b04f36c234b7db
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.0"
   synchronized:
     dependency: transitive
     description:
@@ -1394,14 +1266,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
-  the_apple_sign_in:
-    dependency: "direct main"
-    description:
-      name: the_apple_sign_in
-      sha256: "52163df2619e5461f63559002eee171fe78ebab3af6f6f34c4026df5f15859ad"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
   timing:
     dependency: transitive
     description:
@@ -1515,7 +1379,7 @@ packages:
     source: hosted
     version: "2.1.4"
   video_player:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: video_player
       sha256: "74b86e63529cf5885130c639d74cd2f9232e7c8a66cbecbddd1dcb9dbd060d1e"
@@ -1554,14 +1418,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
-  visibility_detector:
-    dependency: transitive
-    description:
-      name: visibility_detector
-      sha256: "15c54a459ec2c17b4705450483f3d5a2858e733aee893dcee9d75fd04814940d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.3"
   wakelock:
     dependency: transitive
     description:

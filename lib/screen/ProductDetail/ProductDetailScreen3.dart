@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import '/../component/HtmlWidget.dart';
 import '/../component/VideoPlayDialog.dart';
@@ -55,7 +55,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen3> {
   List<Widget> productImg = [];
   List<String?> productImg1 = [];
 
-  InterstitialAd? interstitialAd;
+  // InterstitialAd? interstitialAd;
   PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -100,49 +100,49 @@ class _ProductDetailScreenState extends State<ProductDetailScreen3> {
 
   init() async {
     afterBuildCreated(() {
-      adShow();
+      // adShow();
       productDetail();
       fetchReviewData();
       setTimer();
     });
   }
 
-  adShow() async {
-    if (interstitialAd == null) {
-      print('Warning: attempt to show interstitial before loaded.');
-      return;
-    }
-    interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (InterstitialAd ad) => print('ad onAdShowedFullScreenContent.'),
-      onAdDismissedFullScreenContent: (InterstitialAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
-        ad.dispose();
-        _createInterstitialAd();
-      },
-      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
-        ad.dispose();
-        _createInterstitialAd();
-      },
-    );
-    enableAds ? interstitialAd!.show() : SizedBox();
-  }
+  // adShow() async {
+  //   if (interstitialAd == null) {
+  //     print('Warning: attempt to show interstitial before loaded.');
+  //     return;
+  //   }
+  //   interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+  //     onAdShowedFullScreenContent: (InterstitialAd ad) => print('ad onAdShowedFullScreenContent.'),
+  //     onAdDismissedFullScreenContent: (InterstitialAd ad) {
+  //       print('$ad onAdDismissedFullScreenContent.');
+  //       ad.dispose();
+  //       _createInterstitialAd();
+  //     },
+  //     onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+  //       print('$ad onAdFailedToShowFullScreenContent: $error');
+  //       ad.dispose();
+  //       _createInterstitialAd();
+  //     },
+  //   );
+  //   enableAds ? interstitialAd!.show() : SizedBox();
+  // }
 
-  void _createInterstitialAd() {
-    InterstitialAd.load(
-        adUnitId: getInterstitialAdUnitId()!,
-        request: AdRequest(),
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
-            print('$ad loaded');
-            interstitialAd = ad;
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error.');
-            interstitialAd = null;
-          },
-        ));
-  }
+  // void _createInterstitialAd() {
+  //   InterstitialAd.load(
+  //       adUnitId: getInterstitialAdUnitId()!,
+  //       request: AdRequest(),
+  //       adLoadCallback: InterstitialAdLoadCallback(
+  //         onAdLoaded: (InterstitialAd ad) {
+  //           print('$ad loaded');
+  //           interstitialAd = ad;
+  //         },
+  //         onAdFailedToLoad: (LoadAdError error) {
+  //           print('InterstitialAd failed to load: $error.');
+  //           interstitialAd = null;
+  //         },
+  //       ));
+  // }
 
   @override
   void setState(fn) {
