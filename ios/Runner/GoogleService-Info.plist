@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>103863903069-op9vk3iekm5v30gnn5gb2ql6acof5csv.apps.googleusercontent.com</string>
+	<string>982867737657-5df0grhllltt22hq09ocrgecneno5t1c.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.103863903069-op9vk3iekm5v30gnn5gb2ql6acof5csv</string>
+	<string>com.googleusercontent.apps.982867737657-5df0grhllltt22hq09ocrgecneno5t1c</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>103863903069-04r4ff10fbidrek4raet1r4d5jn0gehl.apps.googleusercontent.com</string>
+	<string>982867737657-8vfvm773tedka35f4ilbv32sdat6fiu1.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC83EBt8jnMOQ-KMI2ICkGMdrWhBk9fUUQ</string>
+	<string>AIzaSyAg3FQxLTvtlYiAhaiQwT6kpFiYLau0h-M</string>
 	<key>GCM_SENDER_ID</key>
-	<string>103863903069</string>
+	<string>982867737657</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mightystore</string>
+	<string>com.ainaqah.shop</string>
 	<key>PROJECT_ID</key>
-	<string>mighty-store-b2fdd</string>
+	<string>ainaqah-73bff</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mighty-store-b2fdd.appspot.com</string>
+	<string>ainaqah-73bff.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:103863903069:ios:26902a1cdb6bdc83327eb4</string>
+	<string>1:982867737657:ios:aa9f805ea2cacba82ea1e8</string>
 </dict>
 </plist>
