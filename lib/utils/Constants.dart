@@ -155,7 +155,7 @@ const PRODUCT_DETAIL_VARIANT = 'ProductDetailVariant';
 
 const streamRefresh = "streamRefresh";
 
-// Set theme
+// Set themes
 bool get isHalloween => getBoolAsync(HALLOWEEN_ENABLE);
 const HALLOWEEN_ENABLE = 'halloween_enable';
 
