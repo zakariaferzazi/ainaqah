@@ -64,7 +64,6 @@ void main() async {
   // await Stripe.instance.applySettings();
 
   if (isMobile) {
-    //await setupRemoteConfig();
 
     await OneSignal.shared.setAppId(mOneSignalAPPKey);
     OneSignal.shared.consentGranted(true);
