@@ -55,7 +55,7 @@ dependencies:
 
   # AUTHENTICATION
   google_sign_in: ^5.4.2
-  # the_apple_sign_in: ^1.1.1
+  the_apple_sign_in: ^1.1.1
 
   # CONNECTIVITY
   http: ^0.13.5

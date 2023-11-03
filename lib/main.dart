@@ -71,7 +71,7 @@ void main() async {
     final status = await OneSignal.shared.getDeviceState();
     await setValue(PLAYER_ID, status?.userId.toString());
 
-    // MobileAds.instance.initialize();
+    //MobileAds.instance.initialize();
     //FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   }
 
