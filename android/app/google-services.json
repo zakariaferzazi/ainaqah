@@ -12,7 +12,20 @@
           "package_name": "com.ainaqah.shop"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "982867737657-beem45okrrntvqjedkcc11s6mf3047qt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ainaqah.shop",
+            "certificate_hash": "f9bf808b78b1a5c7620e09062ed042031f5a84d5"
+          }
+        },
+        {
+          "client_id": "982867737657-chdgschph2iol3r9carkpbbhlrituvs8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCX9Pr9Y-yAH5BNQfYhSL939Xq6htLfUmE"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982867737657-chdgschph2iol3r9carkpbbhlrituvs8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "982867737657-5df0grhllltt22hq09ocrgecneno5t1c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ainaqah.shop"
+              }
+            }
+          ]
         }
       }
     }
