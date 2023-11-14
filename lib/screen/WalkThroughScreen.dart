@@ -36,7 +36,7 @@ class WalkThroughScreenState extends State<WalkThroughScreen> {
             20.height,
             Text('Welcome to Ainaqah', style: boldTextStyle(size: 24))
                 .paddingOnly(top: 16, left: 16),
-            Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
+            Text('Shopping is my all-time favorite thing to do! Tish Cyrus. ',
                     textAlign: TextAlign.center,
                     style: secondaryTextStyle(size: 16))
                 .paddingOnly(right: 24, left: 16, top: 8)
@@ -55,7 +55,7 @@ class WalkThroughScreenState extends State<WalkThroughScreen> {
             20.height,
             Text('Checkout', style: boldTextStyle(size: 24))
                 .paddingOnly(top: 16, left: 16),
-            Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
+            Text('Win or lose, we go shopping after the election. Imelda Marcos.',
                     textAlign: TextAlign.center,
                     style: secondaryTextStyle(size: 16))
                 .paddingOnly(right: 24, left: 16, top: 8)
@@ -74,7 +74,7 @@ class WalkThroughScreenState extends State<WalkThroughScreen> {
             20.height,
             Text('Get Your Order', style: boldTextStyle(size: 24))
                 .paddingOnly(top: 16, left: 16),
-            Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
+            Text('I always say shopping is cheaper than a psychiatrist. ',
                     textAlign: TextAlign.center,
                     style: secondaryTextStyle(size: 16))
                 .paddingOnly(right: 24, left: 16, top: 8)

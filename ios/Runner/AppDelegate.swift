@@ -33,7 +33,7 @@ import Flutter
         print(url)
 
         let newURL = URL(string: url.absoluteString)!
-        self.productId = newURL.valueOf("id")!
+    
         return false
     }
 }
@@ -44,3 +44,4 @@ extension URL {
         return url.queryItems?.first(where: { $0.name == queryParamaterName })?.value
     }
 }
+

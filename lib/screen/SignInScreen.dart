@@ -64,7 +64,6 @@ class SignInScreenState extends State<SignInScreen> {
     var appLocalization = AppLocalizations.of(context)!;
 
     void signInApi(req) async {
-
       appStore.setLoading(true);
       await login(req).then((res) async {
         if (!mounted) return;
@@ -133,7 +132,7 @@ class SignInScreenState extends State<SignInScreen> {
       await service.signInWithGoogle().then((res) {
         socialLogin(res);
       }).catchError((e) {
-        toast(e.toString());
+        print(e.toString());
       });
     }
 
@@ -177,7 +176,8 @@ class SignInScreenState extends State<SignInScreen> {
 
     void appleLogIn() async {
       if (await TheAppleSignIn.isAvailable()) {
-        final AuthorizationResult result = await TheAppleSignIn.performRequests([
+        final AuthorizationResult result =
+            await TheAppleSignIn.performRequests([
           AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
         ]);
         switch (result.status) {
@@ -201,27 +201,72 @@ class SignInScreenState extends State<SignInScreen> {
       }
     }
 
-    Widget socialButtons = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        GoogleLogoWidget(size: 28).onTap(() {
-          onGoogleSignInTap();
-        }).visible(enableSignWithGoogle == true),
-        8.width,
-        IconButton(
-          onPressed: () {
-            MobileNumberSignInScreen().launch(context);
-          },
-          icon: Icon(MaterialIcons.phone_android, size: 36),
-        ).visible(enableSignWithOtp == true),
-        8.width,
-        IconButton(
-          onPressed: () {
-             appleLogIn();
-          },
-          icon: Icon(Ionicons.ios_logo_apple, size: 36),
-        ).visible(Platform.isIOS && enableSignWithApple == true),
-      ],
+    Widget socialButtons = Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          AppButton(
+              width: context.width(),
+              textStyle: primaryTextStyle(color: white),
+              
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GoogleLogoWidget(size: 20),
+                  SizedBox(width: 10,),
+                  Text('Google', style: TextStyle(fontSize: 17),)
+                ],
+              ),
+              
+              onTap: () {
+                onGoogleSignInTap();
+              },
+              color: Colors.grey,
+            ),
+          8.height,
+          AppButton(
+              width: context.width(),
+              textStyle: primaryTextStyle(color: white),
+              
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(MaterialIcons.phone_android, size: 28),
+                  SizedBox(width: 10,),
+                  Text('Phone Number', style: TextStyle(fontSize: 17),)
+                ],
+              ),
+              
+              onTap: () {
+                MobileNumberSignInScreen().launch(context);
+                
+              },
+              color: Colors.grey,
+            ),
+          
+          8.height,
+          AppButton(
+              width: context.width(),
+              textStyle: primaryTextStyle(color: white),
+              
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Ionicons.ios_logo_apple, size: 28),
+                  SizedBox(width: 10,),
+                  Text('Apple', style: TextStyle(fontSize: 17),)
+                ],
+              ),
+              
+              onTap: () {
+                appleLogIn();
+                
+              },
+              color: Colors.grey,
+            ).visible(Platform.isIOS && enableSignWithApple == true),
+          
+        ],
+      ),
     );
 
     return Scaffold(
@@ -229,9 +274,13 @@ class SignInScreenState extends State<SignInScreen> {
       bottomNavigationBar: RichTextWidget(
         textAlign: TextAlign.center,
         list: [
-          TextSpan(text: appLocalization.translate('lbl_dont_t_have_an_account'), style: primaryTextStyle(size: 14)),
+          TextSpan(
+              text: appLocalization.translate('lbl_dont_t_have_an_account'),
+              style: primaryTextStyle(size: 14)),
           TextSpan(text: "  "),
-          TextSpan(text: appLocalization.translate('lbl_sign_up_link')!, style: primaryTextStyle(color: primaryColor)),
+          TextSpan(
+              text: appLocalization.translate('lbl_sign_up_link')!,
+              style: primaryTextStyle(color: primaryColor)),
         ],
       ).onTap(() {
         SignUpScreen().launch(context);
@@ -248,8 +297,10 @@ class SignInScreenState extends State<SignInScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     50.height,
-                    Text(appLocalization.translate('lbl_welcome')!, style: boldTextStyle(color: primaryColor, size: 26)),
-                    Text(appLocalization.translate('lbl_back')!, style: primaryTextStyle(color: primaryColor, size: 26)),
+                    Text(appLocalization.translate('lbl_welcome')!,
+                        style: boldTextStyle(color: primaryColor, size: 26)),
+                    Text(appLocalization.translate('lbl_back')!,
+                        style: primaryTextStyle(color: primaryColor, size: 26)),
                     24.height,
                     EditText(
                       hintText: appLocalization.translate('hint_Username'),
@@ -257,7 +308,9 @@ class SignInScreenState extends State<SignInScreen> {
                       isSecure: false,
                       mController: usernameCont,
                       validator: (v) {
-                        if (v.trim().isEmpty) return appLocalization.translate('error_username_require');
+                        if (v.trim().isEmpty)
+                          return appLocalization
+                              .translate('error_username_require');
                         return null;
                       },
                     ),
@@ -268,7 +321,8 @@ class SignInScreenState extends State<SignInScreen> {
                       mController: passwordCont,
                       isSecure: true,
                       validator: (v) {
-                        if (v.trim().isEmpty) return appLocalization.translate('error_pwd_require');
+                        if (v.trim().isEmpty)
+                          return appLocalization.translate('error_pwd_require');
                         return null;
                       },
                     ),
@@ -279,7 +333,8 @@ class SignInScreenState extends State<SignInScreen> {
                         Row(
                           children: [
                             Checkbox(
-                              value: getBoolAsync(IS_REMEMBERED, defaultValue: false),
+                              value: getBoolAsync(IS_REMEMBERED,
+                                  defaultValue: false),
                               checkColor: white,
                               activeColor: primaryColor,
                               onChanged: (v) async {
@@ -290,18 +345,26 @@ class SignInScreenState extends State<SignInScreen> {
                             ),
                             TextButton(
                               onPressed: () async {
-                                await setValue(IS_REMEMBERED, !getBoolAsync(IS_REMEMBERED));
+                                await setValue(IS_REMEMBERED,
+                                    !getBoolAsync(IS_REMEMBERED));
                                 setState(() {});
                               },
-                              child: Text(appLocalization.translate('lbl_remember_me')!, style: secondaryTextStyle()),
+                              child: Text(
+                                  appLocalization.translate('lbl_remember_me')!,
+                                  style: secondaryTextStyle()),
                             ),
                           ],
                         ).expand(),
                         TextButton(
                           onPressed: () async {
-                            showDialog(context: context, builder: (BuildContext context) => CustomDialog());
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    CustomDialog());
                           },
-                          child: Text(appLocalization.translate('lbl_forgot_password')!, style: secondaryTextStyle(color: primaryColor)),
+                          child: Text(
+                              appLocalization.translate('lbl_forgot_password')!,
+                              style: secondaryTextStyle(color: primaryColor)),
                         ),
                       ],
                     ),
@@ -314,7 +377,10 @@ class SignInScreenState extends State<SignInScreen> {
                         hideKeyboard(context);
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
-                          var request = {"username": "${usernameCont.text}", "password": "${passwordCont.text}"};
+                          var request = {
+                            "username": "${usernameCont.text}",
+                            "password": "${passwordCont.text}"
+                          };
                           appStore.setLoading(true);
                           signInApi(request);
                         }
@@ -327,7 +393,9 @@ class SignInScreenState extends State<SignInScreen> {
                 ),
               ),
             ),
-            Observer(builder: (context) => mProgress().center().visible(appStore.isLoading)),
+            Observer(
+                builder: (context) =>
+                    mProgress().center().visible(appStore.isLoading)),
           ],
         ),
       ),
@@ -369,7 +437,9 @@ class _CustomDialogState extends State<CustomDialog> {
       backgroundColor: Colors.transparent,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        decoration: boxDecorationWithRoundedCorners(borderRadius: radius(10), backgroundColor: Theme.of(context).cardTheme.color!),
+        decoration: boxDecorationWithRoundedCorners(
+            borderRadius: radius(10),
+            backgroundColor: Theme.of(context).cardTheme.color!),
         child: SingleChildScrollView(
           child: Stack(
             children: [
@@ -377,15 +447,21 @@ class _CustomDialogState extends State<CustomDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(appLocalization.translate('lbl_forgot_password')!, style: boldTextStyle(color: primaryColor, size: 24)).paddingOnly(left: 16, right: 16, top: 16),
+                  Text(appLocalization.translate('lbl_forgot_password')!,
+                          style: boldTextStyle(color: primaryColor, size: 24))
+                      .paddingOnly(left: 16, right: 16, top: 16),
                   16.height,
                   EditText(
-                      hintText: appLocalization.translate('hint_enter_your_email_id'),
+                      hintText:
+                          appLocalization.translate('hint_enter_your_email_id'),
                       isPassword: false,
                       mController: email,
                       validator: (String? v) {
-                        if (v!.trim().isEmpty) return appLocalization.translate('error_email_required');
-                        if (!v.trim().validateEmail()) return appLocalization.translate('error_wrong_email');
+                        if (v!.trim().isEmpty)
+                          return appLocalization
+                              .translate('error_email_required');
+                        if (!v.trim().validateEmail())
+                          return appLocalization.translate('error_wrong_email');
                         return null;
                       }).paddingOnly(left: 16, right: 16, bottom: 8),
                   AppButton(
@@ -398,7 +474,10 @@ class _CustomDialogState extends State<CustomDialog> {
                           return;
                         }
                         if (email.text.isEmpty) {
-                          toast(appLocalization.translate('hint_Email')! + (' ') + appLocalization.translate('error_field_required')!);
+                          toast(appLocalization.translate('hint_Email')! +
+                              (' ') +
+                              appLocalization
+                                  .translate('error_field_required')!);
                         } else if (!email.text.validateEmail()) {
                           toast(appLocalization.translate('error_wrong_email'));
                         } else {
@@ -408,7 +487,9 @@ class _CustomDialogState extends State<CustomDialog> {
                       }).paddingAll(16)
                 ],
               ),
-              Observer(builder: (context) => mProgress().center().visible(appStore.isLoading)),
+              Observer(
+                  builder: (context) =>
+                      mProgress().center().visible(appStore.isLoading)),
             ],
           ),
         ),

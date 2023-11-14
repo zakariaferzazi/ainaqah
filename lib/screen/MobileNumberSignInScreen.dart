@@ -22,7 +22,8 @@ class MobileNumberSignInScreen extends StatefulWidget {
   final String? title;
 
   @override
-  _MobileNumberSignInScreenState createState() => _MobileNumberSignInScreenState();
+  _MobileNumberSignInScreenState createState() =>
+      _MobileNumberSignInScreenState();
 }
 
 class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
@@ -30,14 +31,17 @@ class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late String _verificationId;
   late String phoneNo;
-  String code = "+91";
+  String code = "+212";
   String? smsOTP;
   String? data;
   var passwordCont = TextEditingController();
 
   void verifyPhoneNumber() async {
-    PhoneVerificationCompleted verificationCompleted = (AuthCredential phoneAuthCredential) async {};
-    PhoneVerificationFailed verificationFailed = (FirebaseAuthException authException) {
+    appStore.setLoading(true);
+    PhoneVerificationCompleted verificationCompleted =
+        (AuthCredential phoneAuthCredential) async {};
+    PhoneVerificationFailed verificationFailed =
+        (FirebaseAuthException authException) {
       if (authException.code == 'invalid-phone-number') {
         toast('The provided phone number is not valid.');
         throw 'The provided phone number is not valid.';
@@ -46,12 +50,14 @@ class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
         throw authException.toString();
       }
     };
-    PhoneCodeSent codeSent = (String verificationId, [int? forceResendingToken]) async {
+    PhoneCodeSent codeSent =
+        (String verificationId, [int? forceResendingToken]) async {
       toast('Please check your phone for the verification code.');
       _verificationId = verificationId;
       smsOTPDialog(context).then((value) {});
     };
-    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout = (String verificationId) {};
+    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
+        (String verificationId) {};
     try {
       await _auth.verifyPhoneNumber(
           phoneNumber: this.phoneNo,
@@ -62,51 +68,63 @@ class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
     } catch (e) {
       toast("Failed to Verify Phone Number: $e");
     }
+    appStore.setLoading(false);
   }
 
   void signInWithPhoneNumber() async {
     appStore.setLoading(true);
 
-    AuthCredential credential = PhoneAuthProvider.credential(verificationId: _verificationId, smsCode: smsOTP.validate());
+    AuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: _verificationId, smsCode: smsOTP.validate());
 
-    await FirebaseAuth.instance.signInWithCredential(credential).then((result) async {
-      var request = {"username": this.data, "password": this.data};
-      signInApi(request);
+    await FirebaseAuth.instance
+        .signInWithCredential(credential)
+        .then((result) async {
+      var request = {
+        "username": "${this.data}@gmail.com",
+        "password": this.data,
+        "email": "${this.data}@gmail.com",
+        "firstName": "Hi",
+        "lastName": "Dear",
+        "photoURL": "",
+        "accessToken": _verificationId,
+        "loginType": "phone"
+      };
+      socialLogin(request);
     }).catchError((e) {
       toast(e.toString());
       appStore.setLoading(false);
     });
   }
 
-  void signInApi(req) async {
+  void socialLogin(req) async {
     appStore.setLoading(true);
-    await login(req).then((res) async {
+    await socialLoginApi(req).then((res) async {
       if (!mounted) return;
-      await setValue(USER_ID, res['user_id']);
-      await setValue(FIRST_NAME, res['first_name']);
-      await setValue(LAST_NAME, res['last_name']);
-      await setValue(USER_EMAIL, res['user_email']);
-      await setValue(USERNAME, res['user_nicename']);
-      await setValue(TOKEN, res['token']);
-      await setValue(AVATAR, res['avatar']);
-      if (res['profile_image'] != null) {
-        await setValue(PROFILE_IMAGE, res['profile_image']);
-      }
-      await setValue(USER_DISPLAY_NAME, res['user_display_name']);
-      await setValue(BILLING, jsonEncode(res['billing']));
-      await setValue(SHIPPING, jsonEncode(res['shipping']));
-      await setValue(IS_SOCIAL_LOGIN, true);
-      await setValue(IS_LOGGED_IN, true);
+      await getCustomer(res['user_id']).then((response) async {
+        if (!mounted) return;
+        await setValue(IS_SOCIAL_LOGIN, true);
+        await setValue(AVATAR, req['photoURL']);
+        await setValue(USER_ID, res['user_id']);
+        await setValue(FIRST_NAME, res['first_name']);
+        await setValue(LAST_NAME, res['last_name']);
+        await setValue(USER_EMAIL, res['user_email']);
+        await setValue(USERNAME, res['user_nicename']);
+        await setValue(TOKEN, res['token']);
+        await setValue(USER_DISPLAY_NAME, res['user_display_name']);
+        await setValue(BILLING, jsonEncode(res['billing']));
+        await setValue(SHIPPING, jsonEncode(res['shipping']));
+        await setValue(IS_LOGGED_IN, true);
 
-      appStore.setLoading(false);
-      DashBoardScreen().launch(context, isNewTask: true);
+        appStore.setLoading(false);
+        DashBoardScreen().launch(context, isNewTask: true);
+      }).catchError((error) {
+        appStore.setLoading(false);
+        toast(error.toString());
+      });
     }).catchError((error) {
-      log("Error" + error.toString());
       appStore.setLoading(false);
-      if (error.toString().contains('The username or password you entered is incorrect.')) {
-        finish(context);
-        SignUpScreen(userName: this.data.toString()).launch(context);
-      }
+      toast(error.toString());
     });
   }
 
@@ -116,21 +134,18 @@ class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return new AlertDialog(
-          backgroundColor: Theme
-              .of(context)
-              .scaffoldBackgroundColor,
-          title: Text(AppLocalizations.of(context)!.translate('lbl_enter_sms_code')!, style: boldTextStyle(color: Theme
-              .of(context)
-              .textTheme
-              .titleMedium!
-              .color)),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text(
+              AppLocalizations.of(context)!.translate('lbl_enter_sms_code')!,
+              style: boldTextStyle(
+                  color: Theme.of(context).textTheme.titleMedium!.color)),
           content: Container(
             height: 85,
             child: Column(
               children: [
                 OTPTextField(
                   pinLength: 6,
-                  fieldWidth: 30,
+                  fieldWidth: 25,
                   onChanged: (pin) {
                     print("Changed: " + pin);
                   },
@@ -179,18 +194,18 @@ class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
                   24.height,
                   Container(
                     decoration: boxDecorationWithRoundedCorners(
-                        backgroundColor: Theme
-                            .of(context)
-                            .cardTheme
-                            .color!, borderRadius: radius(8), border: Border.all(color: Theme
-                        .of(context)
-                        .textTheme
-                        .titleMedium!
-                        .color!)),
+                        backgroundColor: Theme.of(context).cardTheme.color!,
+                        borderRadius: radius(8),
+                        border: Border.all(
+                            color: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .color!)),
                     padding: EdgeInsets.only(left: 8),
                     child: Row(
                       children: <Widget>[
                         CountryCodePicker(
+                          initialSelection: "+212",
                           onChanged: (value) {
                             log("Value" + value.dialCode!);
                             this.code = value.dialCode.toString();
@@ -200,18 +215,20 @@ class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
                           padding: EdgeInsets.all(4),
                           dialogTextStyle: secondaryTextStyle(),
                           searchStyle: secondaryTextStyle(),
-                          searchDecoration: InputDecoration(labelStyle: secondaryTextStyle()),
-                          dialogBackgroundColor: Theme
-                              .of(context)
-                              .cardTheme
-                              .color,
-                          boxDecoration: BoxDecoration(borderRadius: radius(4), color: Theme
-                              .of(context)
-                              .cardTheme
-                              .color!),
+                          searchDecoration:
+                              InputDecoration(labelStyle: secondaryTextStyle()),
+                          dialogBackgroundColor:
+                              Theme.of(context).cardTheme.color,
+                          boxDecoration: BoxDecoration(
+                              borderRadius: radius(4),
+                              color: Theme.of(context).cardTheme.color!),
                           textStyle: primaryTextStyle(),
                         ),
-                        Container(height: 30.0, width: 1.0, color: primaryColor, margin: EdgeInsets.only(left: 10.0, right: 10.0)),
+                        Container(
+                            height: 30.0,
+                            width: 1.0,
+                            color: primaryColor,
+                            margin: EdgeInsets.only(left: 10.0, right: 10.0)),
                         Expanded(
                           child: TextFormField(
                             keyboardType: TextInputType.number,
@@ -221,7 +238,8 @@ class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
                             decoration: InputDecoration(
                               counterText: "",
                               contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                              hintText: appLocalization.translate('lbl_enter_mobile_number'),
+                              hintText: appLocalization
+                                  .translate('lbl_enter_mobile_number'),
                               hintStyle: secondaryTextStyle(size: 18),
                               border: InputBorder.none,
                             ),
@@ -238,13 +256,16 @@ class _MobileNumberSignInScreenState extends State<MobileNumberSignInScreen> {
                         hideKeyboard(context);
                         this.phoneNo = this.code + passwordCont.text.toString();
                         this.data = passwordCont.text.toString();
+
                         verifyPhoneNumber();
                       },
                       textStyle: primaryTextStyle(color: white),
                       color: primaryColor),
                 ],
               ).center().paddingAll(16),
-              Observer(builder: (context) => mProgress().visible(appStore.isLoading)),
+              Observer(
+                  builder: (context) =>
+                      mProgress().visible(appStore.isLoading)),
             ],
           ),
         ),

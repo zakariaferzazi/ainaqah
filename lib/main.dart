@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:country_code_picker/country_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +23,8 @@ import 'package:nb_utils/nb_utils.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+
+
 
 BuilderResponse builderResponse = BuilderResponse();
 Color? primaryColor;
@@ -64,7 +65,7 @@ void main() async {
   // await Stripe.instance.applySettings();
 
   if (isMobile) {
-
+    
     await OneSignal.shared.setAppId(mOneSignalAPPKey);
     OneSignal.shared.consentGranted(true);
     OneSignal.shared.promptUserForPushNotificationPermission();
@@ -144,6 +145,7 @@ void main() async {
         .toList());
   }
 
+
   baseUrl = getStringAsync(APP_URL);
   ConsumerKey = getStringAsync(CONSUMER_KEY);
   ConsumerSecret = getStringAsync(CONSUMER_SECRET);
@@ -154,6 +156,9 @@ void main() async {
   } else if (themeModeIndex == ThemeModeDark) {
     appStore.setDarkMode(aIsDarkMode: true);
   }
+
+
+
 
   appStore.setLanguage(getStringAsync(LANGUAGE, defaultValue: defaultLanguage));
 
